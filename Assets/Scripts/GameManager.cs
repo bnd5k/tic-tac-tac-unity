@@ -48,11 +48,17 @@ public class GameManager : MonoBehaviour
 		var randomItemIndex = Random.Range(0, availableTiles.Count - 1);
 		var selectedTilePosition = availableTiles[randomItemIndex];
 
+		Debug.Log($"selectedTilePosition: {selectedTilePosition}");
+
+
 		//find tile and change text value to 0
 		var buttonName = $"Button{selectedTilePosition}"; // FIXME.  This is fragile.
 		var selectedButton = GameObject.Find(buttonName).GetComponent<TileButton>();
 		selectedButton.tileValue.text = "O";
 
+
+		selectedButton.disableButton();
+		              
 		// then save answer
 		GameManager.instance.SaveProgress(oPositions, selectedTilePosition);
 	}

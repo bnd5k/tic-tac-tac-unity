@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TileButton : MonoBehaviour {
 
+	public Button button; // FIXME: Odd that I need to attach this component to the button in Unity, then associate the button with this property
 	public int position;
 	public Text tileValue;
 
@@ -12,14 +13,16 @@ public class TileButton : MonoBehaviour {
 		tileValue.text = "X";
 
 		GameManager.instance.SaveProgress(GameManager.instance.xPositions, position);
+		disableButton();
 
 		// TODO: add some sort of protection against user trying to mvoe while computer is moving.
 
 		// Delay this call by 1 second so it seems like the machine is thinking
 		GameManager.instance.Invoke("moveOpponent", .5f);
 
-		// change bkground color
-		// update progress in game controller
-		// call move opponent in game contorller
+	}
+
+	public void disableButton() {
+		button.interactable = false;		
 	}
 }
