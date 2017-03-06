@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 		positionList.Add(position);
 	}
 
-	public void moveOpponent() {
+	public void MoveOpponent() {
 
 		// find the free tiles and randomly select 1
 		List<int> occupiedTiles = (oPositions.Count > 0) ? xPositions.Concat(oPositions).ToList() : xPositions;
@@ -57,14 +57,13 @@ public class GameManager : MonoBehaviour
 		selectedButton.tileValue.text = "O";
 
 
-		selectedButton.disableButton();
+		selectedButton.DisableButton();
 		              
 		// then save answer
 		GameManager.instance.SaveProgress(oPositions, selectedTilePosition);
 	}
 
-
-	public string prettyPrint(List<int> myList)
+	private string PrettyPrint(List<int> myList)
 	{
 		if (myList.Count > 0)
 		{
