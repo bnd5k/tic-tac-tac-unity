@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
 {
 
 	public static GameManager instance;
-	//public GameObject gameOverPanel;
-
 	public Button[] buttons;
 	public string winner;
 
@@ -39,13 +37,9 @@ public class GameManager : MonoBehaviour
 
 		DontDestroyOnLoad(gameObject); //somehow this isn't necessary?
 
-
 		gameProgress = new Dictionary<string, List<int>> ();
 		gameProgress.Add("x", xPositions);
 		gameProgress.Add("o", oPositions);
-
-		//gameOverPanel = GameObject.Find("GameOverPanel");
-
 	}
 
 	public void SaveProgress(List<int> positionList, int position)
@@ -105,9 +99,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	private void GameOver() {
-		//gameOverPanel.SetActive(true);
-		//gameOverPanel.gameObject.SetActive(true);
-		Application.LoadLevel("GameOver");
+		Application.LoadLevel("GameOverScreen");
 	}
 
 	private bool GameEndsInDraw()
@@ -151,7 +143,7 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void RestartGame() {
-		Application.LoadLevel("Main");
+		Application.LoadLevel("GameScreen");
 	}
 
 	private string PrettyPrintArray(List<int>[] myArray)
