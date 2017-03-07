@@ -10,9 +10,10 @@ public class TileButton : MonoBehaviour {
 	public Text tileValue;
 
 	public void HandleClickEvent() {
-		tileValue.text = "X";
+		string markerType = "X";
+		tileValue.text = markerType;
 
-		GameManager.instance.SaveProgress(GameManager.instance.xPositions, position);
+		GameManager.instance.SaveProgress(markerType, position);
 		DisableButton();
 
 		GameManager.instance.CheckIfGameComplete();

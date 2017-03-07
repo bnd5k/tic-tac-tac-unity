@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Linq; //still needed?
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class GameManager : MonoBehaviour
 	public string winner;
 
 	private Dictionary<string, List<int>> gameProgress;
-	public List<int> xPositions = new List<int>();
+	private List<int> xPositions = new List<int>();
 	private List<int> oPositions = new List<int>();
 	private List<int> allTilePositions = new List<int>(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
 
@@ -42,18 +43,34 @@ public class GameManager : MonoBehaviour
 		gameProgress.Add("o", oPositions);
 	}
 
-	public void SaveProgress(List<int> positionList, int position)
+	public void SaveProgress(string markerType, int position)
 	{
+		if (markerType == "X")
+		{
+			updateList(xPositions, position);
+		}
+		else if (markerType == "O")
+		{
+			updateList(oPositions, position);
+		}
+		else
+		{
+			Debug.Log("IncorrectMarkerTypeSent");
+		}
+
+	}
+
+	private void updateList(List<int> positionList, int position) {
 		positionList.Add(position);
-		positionList.Sort(); // ensure we're putting them in the right order.  Matters for pattern matching of winning tile arrangements
+		positionList.Sort();	// ensure we're putting them in the right order.  Matters for pattern matching of winning tile arrangements	
 	}
 
 	public void MoveOpponent() {
 
 		// find the free tiles and randomly select 1
 		List<int> occupiedTiles = (oPositions.Count > 0) ? xPositions.Concat(oPositions).ToList() : xPositions;
-		//List<int> availableTiles = allTilePositions.Except(occupiedTiles).ToList();
-		List<int> availableTiles = new List<int>(new List<int> { 7, 8, 9 });
+		List<int> availableTiles = allTilePositions.Except(occupiedTiles).ToList();
+		//List<int> availableTiles = new List<int>(new List<int> { 7, 8, 9 }); 
 
 		int randomItemIndex = Random.Range(0, availableTiles.Count - 1);
 
@@ -69,7 +86,7 @@ public class GameManager : MonoBehaviour
 
 		selectedButton.DisableButton();
 		              
-		GameManager.instance.SaveProgress(oPositions, selectedTilePosition);
+		GameManager.instance.SaveProgress("O", selectedTilePosition);
 		CheckIfGameComplete();
 	}
 
@@ -99,7 +116,8 @@ public class GameManager : MonoBehaviour
 	}
 
 	private void GameOver() {
-		Application.LoadLevel("GameOverScreen");
+		SceneManager.LoadScene("GameOverScreen");
+		//Application.LoadLevel("GameOverScreen");
 	}
 
 	private bool GameEndsInDraw()
@@ -143,7 +161,8 @@ public class GameManager : MonoBehaviour
 	}
 
 	public void RestartGame() {
-		Application.LoadLevel("GameScreen");
+		SceneManager.LoadScene("GameScreen");
+//		Application.LoadLevel("GameScreen");
 	}
 
 	private string PrettyPrintArray(List<int>[] myArray)
