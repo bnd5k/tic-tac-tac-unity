@@ -60,6 +60,11 @@ public class GameManager : MonoBehaviour
 
 	}
 
+	public void RestartGame()
+	{
+		SceneManager.LoadScene("GameScreen");
+	}
+
 	private void updateList(List<int> positionList, int position) {
 		positionList.Add(position);
 		positionList.Sort();	// ensure we're putting them in the right order.  Matters for pattern matching of winning tile arrangements	
@@ -69,15 +74,12 @@ public class GameManager : MonoBehaviour
 
 		// find the free tiles and randomly select 1
 		List<int> occupiedTiles = (oPositions.Count > 0) ? xPositions.Concat(oPositions).ToList() : xPositions;
-		List<int> availableTiles = allTilePositions.Except(occupiedTiles).ToList();
-		//List<int> availableTiles = new List<int>(new List<int> { 7, 8, 9 }); 
+		//List<int> availableTiles = allTilePositions.Except(occupiedTiles).ToList();
+		List<int> availableTiles = new List<int>(new List<int> { 7, 8, 9 }); // for speedier gameplay ;)
 
 		int randomItemIndex = Random.Range(0, availableTiles.Count - 1);
 
 		int selectedTilePosition = availableTiles[randomItemIndex];
-
-		Debug.Log($"selectedTilePosition: {selectedTilePosition}");
-
 
 		//find tile and change text value to 0
 		string buttonName = $"Button{selectedTilePosition}"; // FIXME.  This is fragile.
@@ -90,7 +92,8 @@ public class GameManager : MonoBehaviour
 		CheckIfGameComplete();
 	}
 
-	public void CheckIfGameComplete() {
+	public void CheckIfGameComplete()
+	{
 
 		bool xWins = WinningSequenceFound(xPositions);
 		bool oWins = WinningSequenceFound(oPositions);
@@ -99,7 +102,8 @@ public class GameManager : MonoBehaviour
 		{
 			winner = "X";
 			GameOver();
-		} else if (oWins)
+		}
+		else if (oWins)
 		{
 			winner = "O";
 			GameOver();
@@ -108,16 +112,7 @@ public class GameManager : MonoBehaviour
 		{
 			winner = "No one";
 			GameOver();
-			}
-
-		Debug.Log($"winner: {winner}");
-		// show game over screen
-
-	}
-
-	private void GameOver() {
-		SceneManager.LoadScene("GameOverScreen");
-		//Application.LoadLevel("GameOverScreen");
+		}
 	}
 
 	private bool GameEndsInDraw()
@@ -141,13 +136,7 @@ public class GameManager : MonoBehaviour
 		{
 			for (int i = 0; i < winningPatterns.Length; i++)
 			{
-
-				Debug.Log($"poop: {PrettyPrintArray(winningPatterns)}");
-
 				List<int> winPattern = winningPatterns[i] as List<int>;
-
-
-				Debug.Log($"winPattern: {PrettyPrint(winPattern)}");
 
 				if (positions.SequenceEqual(winPattern))
 				{
@@ -160,9 +149,9 @@ public class GameManager : MonoBehaviour
 		return winFound;
 	}
 
-	public void RestartGame() {
-		SceneManager.LoadScene("GameScreen");
-//		Application.LoadLevel("GameScreen");
+	private void GameOver()
+	{
+		SceneManager.LoadScene("GameOverScreen");
 	}
 
 	private string PrettyPrintArray(List<int>[] myArray)
