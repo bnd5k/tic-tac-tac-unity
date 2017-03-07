@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ResetButton : MonoBehaviour {
-
+public class ResetButton : MonoBehaviour
+{
 
 	public void HandleClickEvent()
 	{

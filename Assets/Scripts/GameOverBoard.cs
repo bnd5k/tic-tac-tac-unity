@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameOverBoard : MonoBehaviour {
+public class GameOverBoard : MonoBehaviour
+{
 
 	public Text winnerText;
 

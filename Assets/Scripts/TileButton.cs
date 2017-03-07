@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TileButton : MonoBehaviour {
+public class TileButton : MonoBehaviour
+{
 
 	public Button button; // FIXME: Odd that I need to attach this component to the button in Unity, then associate the button with this property
 	public int position;
 	public Text tileValue;
 
-	public void HandleClickEvent() {
+	public void HandleClickEvent()
+	{
 		string markerType = "X";
 		tileValue.text = markerType;
 
@@ -25,7 +27,8 @@ public class TileButton : MonoBehaviour {
 		GameManager.instance.Invoke("MoveOpponent", .5f);
 	}
 
-	public void DisableButton() {
-		button.interactable = false;		
+	public void DisableButton()
+	{
+		button.interactable = false;
 	}
 }
