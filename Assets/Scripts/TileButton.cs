@@ -15,16 +15,15 @@ public class TileButton : MonoBehaviour
 		string markerType = "X";
 		tileValue.text = markerType;
 
-		GameManager.instance.SaveProgress(markerType, position);
+		BoardManager.instance.SaveProgress(markerType, position);
 		DisableButton();
 
-		GameManager.instance.CheckIfGameComplete();
+		BoardManager.instance.CheckIfGameComplete();
 
 		// TODO: add some sort of protection against user trying to mvoe while computer is moving.
 
-
 		// Delay this call by 1 second so it seems like the machine is thinking		 
-		GameManager.instance.Invoke("MoveOpponent", .5f);
+		BoardManager.instance.Invoke("MoveOpponent", .5f);
 	}
 
 	public void DisableButton()
