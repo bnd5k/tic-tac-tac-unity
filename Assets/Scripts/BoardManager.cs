@@ -16,15 +16,7 @@ public class BoardManager : MonoBehaviour {
 	public List<int> oPositions = new List<int>();
 
 	private List<int> allTilePositions = new List<int>(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-	private List<int>[] winningPatterns = new List<int>[] { win1, win2, win3, win4, win5, win6, win7, win8 };
-	private static List<int> win1 = new List<int>(new List<int> { 1, 2, 3 });
-	private static List<int> win2 = new List<int>(new List<int> { 4, 5, 6 });
-	private static List<int> win3 = new List<int>(new List<int> { 7, 8, 9 });
-	private static List<int> win4 = new List<int>(new List<int> { 1, 4, 7 });
-	private static List<int> win5 = new List<int>(new List<int> { 2, 5, 8 });
-	private static List<int> win6 = new List<int>(new List<int> { 3, 6, 9 });
-	private static List<int> win7 = new List<int>(new List<int> { 1, 5, 9 });
-	private static List<int> win8 = new List<int>(new List<int> { 3, 5, 7 });
+	private int[,] winningPatterns = new int[8, 3] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }, { 1, 4, 7 }, { 2, 5, 8 }, { 3, 6, 9 }, { 1, 5, 9 }, { 3, 5, 7 } } ;
 
 	void Awake()
 	{
@@ -79,7 +71,6 @@ public class BoardManager : MonoBehaviour {
 		{
 			Debug.Log("IncorrectMarkerTypeSent");
 		}
-
 	}
 
 	public void CheckIfGameComplete()
@@ -100,7 +91,6 @@ public class BoardManager : MonoBehaviour {
 		{
 			GameManager.instance.GameOver("No one");
 		}
-
 	}
 
 	private bool didFindWinningPattern(List<int> positions)
@@ -108,13 +98,12 @@ public class BoardManager : MonoBehaviour {
 		bool winFound = false;
 		bool sufficientPositionsOccupiedForWin = positions.Count > 2;
 		// ^^ Need at least 3 elements in positions list in order to get a win.
+
 		if (sufficientPositionsOccupiedForWin) 
 		{
-			
-
-			for (int i = 0; i < winningPatterns.Length; i++)
+			for (int i = 0; i < winningPatterns.GetLength(0); i++)
 			{
-				if (positions.Contains(winningPatterns[i][0]) && positions.Contains(winningPatterns[i][1]) && positions.Contains(winningPatterns[i][2]) ) 
+				if (isWin(positions, i))
 				{
 					winFound = true;
 				}
@@ -123,4 +112,10 @@ public class BoardManager : MonoBehaviour {
 
 		return winFound;
 	}
+
+	private bool isWin(List<int> positions, int winPatternIndex) 
+	{
+		return positions.Contains(winningPatterns[winPatternIndex, 0]) && positions.Contains(winningPatterns[winPatternIndex, 1]) && positions.Contains(winningPatterns[winPatternIndex, 2]);
+	}
+
 }
