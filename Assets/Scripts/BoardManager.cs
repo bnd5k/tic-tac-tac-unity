@@ -6,15 +6,16 @@ using System.Linq;
 
 public class BoardManager : MonoBehaviour {
 
-	public Button[] buttons;
+	public const string xMarker = "X";
+	public const string oMarker = "O";
 
 	public static BoardManager instance;
-
+	
+	public Button[] buttons;
 	public List<int> xPositions = new List<int>();
 	public List<int> oPositions = new List<int>();
 
 	private List<int> allTilePositions = new List<int>(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-
 	private List<int>[] winningPatterns = new List<int>[] { win1, win2, win3, win4, win5, win6, win7, win8 };
 	private static List<int> win1 = new List<int>(new List<int> { 1, 2, 3 });
 	private static List<int> win2 = new List<int>(new List<int> { 4, 5, 6 });
@@ -46,7 +47,7 @@ public class BoardManager : MonoBehaviour {
 		// find the free tiles and randomly select 1
 		List<int> occupiedTiles = (oPositions.Count > 0) ? xPositions.Concat(oPositions).ToList() : xPositions;
 		List<int> availableTiles = allTilePositions.Except(occupiedTiles).ToList();
-		//List<int> availableTiles = new List<int>(new List<int> { 7, 8, 9 }); // for speedier gameplay ;)
+			// List<int> availableTiles = new List<int>(new List<int> { 7, 8, 9 }); // for speedier gameplay ;)
 
 		int randomItemIndex = Random.Range(0, availableTiles.Count - 1);
 
@@ -55,22 +56,22 @@ public class BoardManager : MonoBehaviour {
 		//find tile and change text value to 0
 		string buttonName = $"Button{selectedTilePosition}"; // FIXME.  This is fragile.
 		TileButton selectedButton = GameObject.Find(buttonName).GetComponent<TileButton>();
-		selectedButton.tileValue.text = "O";
+		selectedButton.SetMarkerValue(oMarker);
 
 		selectedButton.DisableButton();
 
-		SaveProgress("O", selectedTilePosition);
+		SaveProgress(oMarker, selectedTilePosition);
 		CheckIfGameComplete();
 	}
 
 
 	public void SaveProgress(string markerType, int position)
 	{
-		if (markerType == "X")
+		if (markerType == xMarker)
 		{
 			xPositions.Add(position);
 		}
-		else if (markerType == "O")
+		else if (markerType == oMarker)
 		{
 			oPositions.Add(position);
 		}
@@ -89,11 +90,11 @@ public class BoardManager : MonoBehaviour {
 
 		if (xWins)
 		{
-			GameManager.instance.GameOver("X");
+			GameManager.instance.GameOver(xMarker);
 		}
 		else if (oWins)
 		{
-			GameManager.instance.GameOver("O");
+			GameManager.instance.GameOver(oMarker);
 		}
 		else if (!xWins && !oWins && xPositions.Count > 4)
 		{

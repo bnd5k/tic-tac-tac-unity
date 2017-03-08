@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject); //somehow this isn't necessary?
 	}
 
-
 	public void PlayGame()
 	{
 		SceneManager.LoadScene("GameScreen");
@@ -33,7 +32,6 @@ public class GameManager : MonoBehaviour
 		SceneManager.LoadScene("GameScreen");
 	}
 
-
 	public void GameOver(string winningMarker)
 	{
 		winner = winningMarker;
@@ -41,6 +39,4 @@ public class GameManager : MonoBehaviour
 		// TODO: slowly transition over to GameOverScreen
 		SceneManager.LoadScene("GameOverScreen");
 	}
-
-
 }
