@@ -64,6 +64,12 @@ public class GameManager : MonoBehaviour
 
 	}
 
+	public void PlayGame()
+	{
+		SceneManager.LoadScene("GameScreen");
+	}
+
+
 	public void RestartGame()
 	{
 		SceneManager.LoadScene("GameScreen");
@@ -94,7 +100,7 @@ public class GameManager : MonoBehaviour
 
 		selectedButton.DisableButton();
 
-		GameManager.instance.SaveProgress("O", selectedTilePosition);
+		SaveProgress("O", selectedTilePosition);
 		CheckIfGameComplete();
 	}
 
@@ -127,7 +133,7 @@ public class GameManager : MonoBehaviour
 
 		bool draw = false;
 
-		if (xPositions.Count >= 4)
+		if (xPositions.Count > 4)
 		{
 			draw = true;
 

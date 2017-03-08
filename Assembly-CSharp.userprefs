@@ -1,10 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameManager.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/MainMenu.cs">
     <Files>
-      <File FileName="Assets/Scripts/GameManager.cs" Line="65" Column="38" />
-      <File FileName="Assets/Scripts/TileButton.cs" Line="15" Column="3" />
-      <File FileName="Assets/Scripts/GameOverBoard.cs" Line="12" Column="34" />
-      <File FileName="Assets/Scripts/ResetButton.cs" Line="10" Column="38" />
+      <File FileName="Assets/Scripts/GameManager.cs" Line="161" Column="52" />
+      <File FileName="Assets/Scripts/TileButton.cs" Line="2" Column="34" />
+      <File FileName="Assets/Scripts/GameOverBoard.cs" Line="3" Column="19" />
+      <File FileName="Assets/Scripts/ResetButton.cs" Line="4" Column="1" />
+      <File FileName="Assets/Scripts/MainMenu.cs" Line="7" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />

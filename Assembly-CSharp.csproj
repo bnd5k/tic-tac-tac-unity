@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameOverBoard.cs" />
+     <Compile Include="Assets\Scripts\MainMenu.cs" />
      <Compile Include="Assets\Scripts\ResetButton.cs" />
      <Compile Include="Assets\Scripts\TileButton.cs" />
  <Reference Include="UnityEngine.Analytics">
