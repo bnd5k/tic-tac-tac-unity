@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 	public void GameOver(string winningMarker)
 	{
 		winner = winningMarker;
+
 		// TODO: slowly transition over to GameOverScreen
 		SceneManager.LoadScene("GameOverScreen");
 	}

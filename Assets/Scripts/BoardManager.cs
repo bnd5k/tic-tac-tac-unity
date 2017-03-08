@@ -10,7 +10,6 @@ public class BoardManager : MonoBehaviour {
 
 	public static BoardManager instance;
 
-	private Dictionary<string, List<int>> gameProgress; // TODO: Remove this?
 	public List<int> xPositions = new List<int>();
 	public List<int> oPositions = new List<int>();
 
@@ -24,12 +23,10 @@ public class BoardManager : MonoBehaviour {
 	private static List<int> win5 = new List<int>(new List<int> { 2, 5, 8 });
 	private static List<int> win6 = new List<int>(new List<int> { 3, 6, 9 });
 	private static List<int> win7 = new List<int>(new List<int> { 1, 5, 9 });
-	private static List<int> win8 = new List<int>(new List<int> { 3, 2, 7 });
+	private static List<int> win8 = new List<int>(new List<int> { 3, 5, 7 });
 
 	void Awake()
 	{
-		// I don't think I need a singletone here
-
 		if (instance == null)
 		{
 			instance = this;
@@ -40,10 +37,6 @@ public class BoardManager : MonoBehaviour {
 		}
 
 		DontDestroyOnLoad(gameObject); //somehow this isn't necessary?
-
-		//gameProgress = new Dictionary<string, List<int>>();
-		//gameProgress.Add("x", xPositions);
-		//gameProgress.Add("o", oPositions);
 	}
 
 
@@ -87,7 +80,6 @@ public class BoardManager : MonoBehaviour {
 		}
 
 	}
-
 
 	private void updateList(List<int> positionList, int position)
 	{
@@ -134,22 +126,20 @@ public class BoardManager : MonoBehaviour {
 	{
 		bool winFound = false;
 		if (positions.Count > 2)
-		// Need at least 3 elements in positions list in order to get a win.
 		{
+			// Need at least 3 elements in positions list in order to get a win.
+
 			for (int i = 0; i < winningPatterns.Length; i++)
 			{
 				List<int> winPattern = winningPatterns[i] as List<int>;
 
-				if (positions.SequenceEqual(winPattern))
+				if (positions.Contains(winPattern[0]) && positions.Contains(winPattern[1]) && positions.Contains(winPattern[2]) ) 
 				{
 					winFound = true;
 				}
-
 			}
 		}
 
 		return winFound;
 	}
-
-
 }
