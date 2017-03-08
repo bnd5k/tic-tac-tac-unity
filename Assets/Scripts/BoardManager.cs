@@ -68,11 +68,11 @@ public class BoardManager : MonoBehaviour {
 	{
 		if (markerType == "X")
 		{
-			updateList(xPositions, position);
+			xPositions.Add(position);
 		}
 		else if (markerType == "O")
 		{
-			updateList(oPositions, position);
+			oPositions.Add(position);
 		}
 		else
 		{
@@ -81,17 +81,11 @@ public class BoardManager : MonoBehaviour {
 
 	}
 
-	private void updateList(List<int> positionList, int position)
-	{
-		positionList.Add(position);
-		positionList.Sort();    // ensure we're putting them in the right order.  Matters for pattern matching of winning tile arrangements	
-	}
-
 	public void CheckIfGameComplete()
 	{
 
-		bool xWins = WinningSequenceFound(xPositions);
-		bool oWins = WinningSequenceFound(oPositions);
+		bool xWins = didFindWinningPattern(xPositions);
+		bool oWins = didFindWinningPattern(oPositions);
 
 		if (xWins)
 		{
@@ -101,39 +95,25 @@ public class BoardManager : MonoBehaviour {
 		{
 			GameManager.instance.GameOver("O");
 		}
-		else if (GameEndsInDraw())
+		else if (!xWins && !oWins && xPositions.Count > 4)
 		{
 			GameManager.instance.GameOver("No one");
 		}
 
 	}
 
-	private bool GameEndsInDraw()
-	{
-		// FIXME: refactor so that it can return correct value, no matter when it's called
-
-		bool draw = false;
-
-		if (xPositions.Count > 4)
-		{
-			draw = true;
-
-		}
-		return draw;
-	}
-
-	private bool WinningSequenceFound(List<int> positions)
+	private bool didFindWinningPattern(List<int> positions)
 	{
 		bool winFound = false;
-		if (positions.Count > 2)
+		bool sufficientPositionsOccupiedForWin = positions.Count > 2;
+		// ^^ Need at least 3 elements in positions list in order to get a win.
+		if (sufficientPositionsOccupiedForWin) 
 		{
-			// Need at least 3 elements in positions list in order to get a win.
+			
 
 			for (int i = 0; i < winningPatterns.Length; i++)
 			{
-				List<int> winPattern = winningPatterns[i] as List<int>;
-
-				if (positions.Contains(winPattern[0]) && positions.Contains(winPattern[1]) && positions.Contains(winPattern[2]) ) 
+				if (positions.Contains(winningPatterns[i][0]) && positions.Contains(winningPatterns[i][1]) && positions.Contains(winningPatterns[i][2]) ) 
 				{
 					winFound = true;
 				}

@@ -10,11 +10,6 @@ public class GameManager : MonoBehaviour
 	public static GameManager instance;
 	public string winner;
 
-	//private Dictionary<string, List<int>> gameProgress;
-	//private List<int> xPositions = new List<int>();
-	//private List<int> oPositions = new List<int>();
-	//private List<int> allTilePositions = new List<int>(new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 });
-
 	void Awake()
 	{
 
