@@ -5,8 +5,8 @@ public class GameManager : MonoBehaviour
 {
 
 	public static GameManager instance;
-	public string winner;
-	public bool gameOver = false;
+	[HideInInspector] public string winner;
+	[HideInInspector] public bool gameOver = false;
 
 	void Awake()
 	{
