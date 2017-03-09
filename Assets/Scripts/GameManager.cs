@@ -19,7 +19,9 @@ public class GameManager : MonoBehaviour
 			Destroy(gameObject);
 		}
 
-		DontDestroyOnLoad(gameObject); //somehow this isn't necessary?
+		DontDestroyOnLoad(gameObject); 
+
+		SceneManager.LoadScene("MainMenu");
 	}
 
 	public void PlayGame()
