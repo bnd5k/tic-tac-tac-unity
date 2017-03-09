@@ -29,33 +29,15 @@ public class BoardManager : MonoBehaviour {
 			Destroy(gameObject);
 		}
 
-		DontDestroyOnLoad(gameObject); //somehow this isn't necessary?
+		DontDestroyOnLoad(gameObject);
 	}
-
 
 	public void MoveOpponent()
 	{
-
-		// find the free tiles and randomly select 1
-		List<int> occupiedTiles = (oPositions.Count > 0) ? xPositions.Concat(oPositions).ToList() : xPositions;
-		List<int> availableTiles = allTilePositions.Except(occupiedTiles).ToList();
-			// List<int> availableTiles = new List<int>(new List<int> { 7, 8, 9 }); // for speedier gameplay ;)
-
-		int randomItemIndex = Random.Range(0, availableTiles.Count - 1);
-
-		int selectedTilePosition = availableTiles[randomItemIndex];
-
-		//find tile and change text value to 0
-		string buttonName = $"Button{selectedTilePosition}"; // FIXME.  This is fragile.
-		TileButton selectedButton = GameObject.Find(buttonName).GetComponent<TileButton>();
-		selectedButton.SetMarkerValue(oMarker);
-
-		selectedButton.DisableButton();
-
+		int selectedTilePosition = SelectFreeTile();
+		MarkTileAsOccupied(selectedTilePosition);
 		SaveProgress(oMarker, selectedTilePosition);
-		CheckIfGameComplete();
 	}
-
 
 	public void SaveProgress(string markerType, int position)
 	{
@@ -71,9 +53,16 @@ public class BoardManager : MonoBehaviour {
 		{
 			Debug.Log("IncorrectMarkerTypeSent");
 		}
+
+		CheckIfGameComplete();
 	}
 
-	public void CheckIfGameComplete()
+	public void clearBoard() {
+		xPositions.Clear();
+		oPositions.Clear();
+	}
+
+	private void CheckIfGameComplete()
 	{
 
 		bool xWins = didFindWinningPattern(xPositions);
@@ -116,6 +105,30 @@ public class BoardManager : MonoBehaviour {
 	private bool isWin(List<int> positions, int winPatternIndex) 
 	{
 		return positions.Contains(winningPatterns[winPatternIndex, 0]) && positions.Contains(winningPatterns[winPatternIndex, 1]) && positions.Contains(winningPatterns[winPatternIndex, 2]);
+	}
+
+
+	private int SelectFreeTile()
+	{
+		// find the free tiles and randomly select 1
+
+		List<int> occupiedTiles = (oPositions.Count > 0) ? xPositions.Concat(oPositions).ToList() : xPositions;
+		List<int> availableTiles = allTilePositions.Except(occupiedTiles).ToList();
+		// List<int> availableTiles = new List<int>(new List<int> { 7, 8, 9 }); // for speedier gameplay ;)
+
+		int randomItemIndex = Random.Range(0, availableTiles.Count);
+
+		return availableTiles[randomItemIndex];
+	}
+
+	private void MarkTileAsOccupied(int selectedTilePosition)
+	{
+		string buttonName = $"Button{selectedTilePosition}"; // FIXME.  This is fragile.
+
+		TileButton selectedButton = GameObject.Find(buttonName).GetComponent<TileButton>();
+
+		selectedButton.SetMarkerValue(oMarker);
+		selectedButton.DisableButton();
 	}
 
 }

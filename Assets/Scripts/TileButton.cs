@@ -13,13 +13,15 @@ public class TileButton : MonoBehaviour
 	public void HandleClickEvent()
 	{
 		SetMarkerValue(BoardManager.xMarker);
-		BoardManager.instance.SaveProgress(BoardManager.xMarker, position);
 		DisableButton();
 
-		BoardManager.instance.CheckIfGameComplete();
+		BoardManager.instance.SaveProgress(BoardManager.xMarker, position);
 
-		// Delay this call by 1 second so it seems like the machine is thinking		 
-		BoardManager.instance.Invoke("MoveOpponent", .5f);
+		if (!GameManager.instance.gameOver)
+		{
+			// Delay this call by 1 second so it seems like the machine is thinking		 
+			BoardManager.instance.Invoke("MoveOpponent", .5f);
+		}
 	}
 
 	public void SetMarkerValue(string markerValue) {

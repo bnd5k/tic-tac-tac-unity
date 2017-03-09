@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 
 	public static GameManager instance;
 	public string winner;
+	public bool gameOver = false;
 
 	void Awake()
 	{
@@ -31,11 +32,14 @@ public class GameManager : MonoBehaviour
 
 	public void RestartGame()
 	{
+		gameOver = false;
+		BoardManager.instance.clearBoard();
 		SceneManager.LoadScene("GameScreen");
 	}
 
 	public void GameOver(string winningMarker)
 	{
+		gameOver = true;
 		winner = winningMarker;
 
 		// TODO: slowly transition over to GameOverScreen
