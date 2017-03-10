@@ -25,6 +25,17 @@ public class GameManager : MonoBehaviour
 		SceneManager.LoadScene("MainMenu");
 	}
 
+	public void Update()
+	{
+		Debug.Log("bye");
+
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			Application.Quit();
+		}
+	}
+
+
 	public void PlayGame()
 	{
 		SceneManager.LoadScene("GameScreen");
