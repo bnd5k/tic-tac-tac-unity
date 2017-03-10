@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\BoardManager.cs" />
      <Compile Include="Assets\Scripts\CollectionLogger.cs" />
+     <Compile Include="Assets\Scripts\Colors.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameOverBoard.cs" />
      <Compile Include="Assets\Scripts\MainMenu.cs" />

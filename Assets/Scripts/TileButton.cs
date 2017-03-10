@@ -10,14 +10,15 @@ public class TileButton : MonoBehaviour
 	public int position;
 	public Text tileValue;
 
-	private Color occupiedTileColor = new Color32(13, 135, 237, 255);
+	void Start() {
+		tileValue.fontSize = 108;
+		tileValue.color = Colors.white;
+	}
 
 	public void HandleClickEvent()
 	{
+		GetComponent<Image>().color = Colors.occupiedTileColor;
 		SetMarkerValue(BoardManager.xMarker);
-
-		GetComponent<Image>().color = occupiedTileColor;
-
 		DisableButton();
 
 		BoardManager.instance.SaveProgress(BoardManager.xMarker, position);
