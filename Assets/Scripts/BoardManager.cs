@@ -18,6 +18,8 @@ public class BoardManager : MonoBehaviour {
 	private int[] allTilePositions = new int[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	private int[,] winningPatterns = new int[8, 3] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }, { 1, 4, 7 }, { 2, 5, 8 }, { 3, 6, 9 }, { 1, 5, 9 }, { 3, 5, 7 } } ;
 
+	private Color opponentOccupiedTileColor = new Color32(58, 237, 22, 255);
+
 	void Awake()
 	{
 		if (instance == null)
@@ -127,6 +129,7 @@ public class BoardManager : MonoBehaviour {
 
 		TileButton selectedButton = GameObject.Find(buttonName).GetComponent<TileButton>();
 
+		selectedButton.GetComponent<Image>().color = opponentOccupiedTileColor;
 		selectedButton.SetMarkerValue(oMarker);
 		selectedButton.DisableButton();
 	}
