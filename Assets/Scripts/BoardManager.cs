@@ -18,6 +18,8 @@ public class BoardManager : MonoBehaviour {
 	private int[] allTilePositions = new int[9] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	private int[,] winningPatterns = new int[8, 3] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 }, { 1, 4, 7 }, { 2, 5, 8 }, { 3, 6, 9 }, { 1, 5, 9 }, { 3, 5, 7 } };
 
+	public LineRenderer lineRenderer;
+
 	void Awake()
 	{
 		if (instance == null)
@@ -30,10 +32,48 @@ public class BoardManager : MonoBehaviour {
 		}
 
 		DontDestroyOnLoad(gameObject);
+
+		GameObject lineObj = new GameObject("LineObj");
+		lineRenderer = lineObj.AddComponent<LineRenderer>();
+	}
+
+	void Update()
+	{
+				//Button button1 = buttons[0];
+		//Button button9 = buttons[8];
+		TileButton button1 = GameObject.Find("Button1").GetComponent<TileButton>();
+		TileButton button9 = GameObject.Find("Button9").GetComponent<TileButton>();
+
+		Debug.Log($"button1 position: {button1.button.transform.position}");
+		Debug.Log($"button1 name: {button1.position}");
+		Debug.Log($"button9 position: {button9.button.transform.position}");
+
+		// Debug.DrawLine(button1.button.transform.position, button9.button.transform.position, Color.green);
+
+		//Physics2D.Linecast(button1.button.transform.position, button9.button.transform.position);
+
+		lineRenderer.material = new Material(Shader.Find("Hidden/Internal-Colored"));
+
+		lineRenderer.startWidth = 3f;
+		lineRenderer.endWidth = 3f;
+
+		lineRenderer.numPositions = 2;
+
+		lineRenderer.SetPosition(0, button1.button.transform.position);
+
+		lineRenderer.SetPosition(1, button9.button.transform.position);
+		//Set color
+		lineRenderer.startColor = Color.green;
+		lineRenderer.endColor = Color.green;
+		//lineRenderer.sortingLayerID = 8;
+
+		Debug.Log($"SortingLayerName: {lineRenderer.sortingLayerName}");
 	}
 
 	public void MoveOpponent()
 	{
+
+
 		int selectedTilePosition = SelectFreeTile();
 		MarkTileAsOccupied(selectedTilePosition);
 		SaveProgress(oMarker, selectedTilePosition);

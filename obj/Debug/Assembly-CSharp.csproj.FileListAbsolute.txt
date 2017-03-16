@@ -1,6 +1,3 @@
-/Users/bendowney/workspace/TicTacToe/obj/Debug/Assembly-CSharp.csprojResolveAssemblyReference.cache
-/Users/bendowney/workspace/TicTacToe/obj/Debug/Assembly-CSharp.dll
-/Users/bendowney/workspace/TicTacToe/obj/Debug/Assembly-CSharp.dll.mdb
 /Users/bendowney/workspace/TicTacToe/Temp/bin/Debug/Assembly-CSharp.dll
 /Users/bendowney/workspace/TicTacToe/Temp/bin/Debug/Assembly-CSharp.dll.mdb
 /Users/bendowney/workspace/TicTacToe/Temp/bin/Debug/UnityEditor.dll
@@ -36,3 +33,6 @@
 /Users/bendowney/workspace/TicTacToe/Temp/bin/Debug/UnityEngine.VR.dll.mdb
 /Users/bendowney/workspace/TicTacToe/Temp/bin/Debug/UnityEngine.VR.xml
 /Users/bendowney/workspace/TicTacToe/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/bendowney/workspace/TicTacToe/obj/Debug/Assembly-CSharp.csprojResolveAssemblyReference.cache
+/Users/bendowney/workspace/TicTacToe/obj/Debug/Assembly-CSharp.dll
+/Users/bendowney/workspace/TicTacToe/obj/Debug/Assembly-CSharp.dll.mdb
